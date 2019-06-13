@@ -1,2 +1,2 @@
 # SampleCodes
-Area for sample codes
+Area for forum sample codes
