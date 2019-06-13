@@ -1,9 +1,11 @@
 from pathlib import Path
+import webbrowser
  
 import wx
  
 WILDCARD = 'Text Documents (*.txt)|*.txt|Python Documents (*.py)|*.py'
 UNTITLED = 'Untitled'
+HELP_URL = 'https://python-forum.io/Thread-WxPython-Tutorial-Notespad-W-I-P'
  
  
 class Notespad(wx.Frame):
@@ -38,6 +40,11 @@ class Notespad(wx.Frame):
         file_menu.AppendSeparator()
         self.menu_exit = file_menu.Append(-1, 'E&xit', 'Exit the Application')
         menubar.Append(file_menu, '&File')
+         
+        help_menu = wx.Menu()
+        self.menu_help = help_menu.Append(wx.ID_HELP, '&Help',
+                                         'Get Help from python-forum.io')
+        menubar.Append(help_menu, '&Help')
  
     def create_gui_items(self):
         self.frame_panel = wx.Panel(self)
@@ -58,6 +65,7 @@ class Notespad(wx.Frame):
         self.Bind(wx.EVT_MENU, self.on_menu_open, self.menu_open)
         self.Bind(wx.EVT_MENU, self.on_menu_save, self.menu_save)
         self.Bind(wx.EVT_MENU, self.on_menu_saveas, self.menu_saveas)
+        self.Bind(wx.EVT_MENU, self.on_menu_help, self.menu_help)
         self.Bind(wx.EVT_MENU, self.on_menu_exit, self.menu_exit)
  
         self.Bind(wx.EVT_CLOSE, self.on_close_evt)
@@ -75,6 +83,9 @@ class Notespad(wx.Frame):
          
     def on_menu_saveas(self, event):
         self.save_as()
+         
+    def on_menu_help(self, event):
+        self.open_forum_page()
  
     def on_menu_exit(self, event):
         self.Close()
@@ -142,6 +153,9 @@ class Notespad(wx.Frame):
                 directory, filename = dlg.GetDirectory(), dlg.GetFilename()
                 self.path = Path(directory).joinpath(filename)
                 self.save()
+ 
+    def open_forum_page(self):
+        webbrowser.open(HELP_URL, 2)
  
  
 if __name__ == '__main__':
