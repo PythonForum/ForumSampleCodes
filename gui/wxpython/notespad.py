@@ -1,7 +1,9 @@
-from pathlib import Path
 import webbrowser
+from pathlib import Path
  
 import wx
+ 
+from python_logo import get_python_logo
  
 WILDCARD = 'Text Documents (*.txt)|*.txt|Python Documents (*.py)|*.py'
 UNTITLED = 'Untitled'
@@ -24,6 +26,7 @@ class Notespad(wx.Frame):
         self.CreateStatusBar()
         self.SetMinSize((600, 400))
         self.CentreOnScreen()
+        self.SetIcon(get_python_logo.GetIcon())
  
     def create_menus(self):
         self.menubar = wx.MenuBar()
@@ -35,13 +38,13 @@ class Notespad(wx.Frame):
     def create_file_menu(self):
         file_menu = wx.Menu()
         self.menu_new = file_menu.Append(wx.ID_NEW, '&New',
-                                    'Creates a new document')
+                                         'Creates a new document')
         self.menu_open = file_menu.Append(wx.ID_OPEN, '&Open',
-                                     'Open an existing file')
+                                          'Open an existing file')
         self.menu_save = file_menu.Append(wx.ID_SAVE, '&Save',
-                                     'Saves the active document')
+                                          'Saves the active document')
         self.menu_saveas = file_menu.Append(wx.ID_SAVEAS, 'Save &As',
-                                'Saves the active document with a new name')
+                                            'Saves the active document with a new name')
         file_menu.AppendSeparator()
         self.menu_exit = file_menu.Append(-1, 'E&xit', 'Exit the Application')
         self.menubar.Append(file_menu, '&File')
@@ -49,22 +52,22 @@ class Notespad(wx.Frame):
     def create_edit_menu(self):
         edit_menu = wx.Menu()
         self.menu_undo = edit_menu.Append(wx.ID_UNDO, '&Undo',
-                                    'Undo change')
+                                          'Undo change')
         edit_menu.AppendSeparator()
         self.menu_cut = edit_menu.Append(wx.ID_CUT, 'Cu&t',
-                                    'Cut the selected text')
+                                         'Cut the selected text')
         self.menu_copy = edit_menu.Append(wx.ID_COPY, '&Copy',
-                                    'Copy the selected text')
+                                          'Copy the selected text')
         self.menu_paste = edit_menu.Append(wx.ID_PASTE, '&Paste',
-                                    'Paste from the clipboard')
+                                           'Paste from the clipboard')
         self.menu_delete = edit_menu.Append(wx.ID_DELETE, 'De&lete',
-                                    'Delete selected text')
+                                            'Delete selected text')
         self.menubar.Append(edit_menu, '&Edit')
  
     def create_help_menu(self):
         help_menu = wx.Menu()
         self.menu_help = help_menu.Append(wx.ID_HELP, '&Help',
-                                         'Get Help from python-forum.io')
+                                          'Get Help from python-forum.io')
         self.menubar.Append(help_menu, '&Help')
  
     def create_gui_items(self):
